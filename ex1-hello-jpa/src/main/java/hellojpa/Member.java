@@ -1,25 +1,38 @@
 package main.java.hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-// jpa 로드 알림
 @Entity
+@SequenceGenerator(name = "mem_sqe_gen", sequenceName = "MEM_SEQ", initialValue = 1, allocationSize = 50)
+//@TableGenerator(
+//		name = "MEMBER_SEQ_GENERATOR",
+//		table = "MY_SEQUENCES",
+//		pkColumnValue = "MEMBER_SEQ", allocationSize = 1)
 public class Member {
-	// key 알려줘야 함
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mem_sqe_gen")
+//	@GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	
+	@Column(name = "name", nullable = false)
+	private String username;
+	
+	public Member() {}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}	
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

@@ -1,7 +1,5 @@
 package main.java.hellojpa;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -31,11 +29,11 @@ public class JpaMain {
 			// INSERT
 //			Member m = new Member();
 //			m.setId(2L);
-//			m.setName("HelloB");
+//			m.setUsername("HelloB");
 //			em.persist(m);			
 			
 			// SELECT
-			Member findMember = em.find(Member.class, 1L);
+//			Member findMember = em.find(Member.class, 1L);
 //			System.out.println("findMember.id = " + findMember.getId());
 //			System.out.println("findMember.name = " + findMember.getName());
 			
@@ -47,16 +45,34 @@ public class JpaMain {
 //			findMember.setName("HelloJPA");
 			
 			// JPQL : 객체 대상 쿼리 작성, DB 종류에 따라 종속 X
-			List<Member> rst = em.createQuery("select m from Member as m", Member.class)
-					.setFirstResult(5)
-					.setMaxResults(10)
-					.getResultList();
-			
-			for (Member m : rst) {
-				System.out.println("member.name = " + m.getName());
-			}
+//			List<Member> rst = em.createQuery("select m from Member as m", Member.class)
+//					.setFirstResult(5)
+//					.setMaxResults(10)
+//					.getResultList();
+//			
+//			for (Member m : rst) {
+//				System.out.println("member.name = " + m.getName());
+//			}
 			
 //			em.flush(); // 트랜잭션 DB 반영
+//			em.detach(findMember); // 준영속 상태
+//			em.clear(); // 영속성 컨텍스트 전체 초기화
+//			em.close(); // 영속성 컨텍스트 종료
+			
+			// Entitiy Mapping
+			Member m = new Member();
+//			m.setId(3L);
+			m.setUsername("A");
+			
+			Member m2 = new Member();
+			m2.setUsername("B");
+			
+			Member m3 = new Member();
+			m3.setUsername("C");
+			
+			em.persist(m); // 1, 51
+			em.persist(m2);
+			em.persist(m3);
 			
 			tx.commit();
 		} catch (Exception e) {
