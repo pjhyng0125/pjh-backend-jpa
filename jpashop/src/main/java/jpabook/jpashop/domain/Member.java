@@ -1,4 +1,7 @@
-package main.java.jpabook.jpashop.domain;
+ package main.java.jpabook.jpashop.domain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,6 +14,10 @@ public class Member {
 	private String city;
 	private String street;
 	private String zipCode;
+	
+	@OneToMany(mappedBy = "member")
+	private List<Order> orders = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
