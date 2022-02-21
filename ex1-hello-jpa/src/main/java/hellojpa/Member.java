@@ -1,5 +1,8 @@
 package main.java.hellojpa;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +25,12 @@ public class Member {
 	@JoinColumn(name = "LOCKER_ID")
 	private Locker locker;
 	
+//	@ManyToMany
+//	@JoinTable(name = "MEMBER_PRODUCT")
+//	private List<Product> products = new ArrayList<>();
+	@OneToMany(mappedBy = "member")
+	private List<MemberProduct> memberProducts = new ArrayList<>();
+	
 	public Member() {}
 
 	public Long getId() {
@@ -39,4 +48,21 @@ public class Member {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public List<MemberProduct> getMemberProducts() {
+		return memberProducts;
+	}
+
+	public void setMemberProducts(List<MemberProduct> memberProducts) {
+		this.memberProducts = memberProducts;
+	}
+	
 }
