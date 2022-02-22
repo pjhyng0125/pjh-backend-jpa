@@ -1,5 +1,7 @@
 package main.java.hellojpa;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -60,19 +62,41 @@ public class JpaMain {
 //			em.close(); // 영속성 컨텍스트 종료
 			
 			// Entitiy Mapping
-			Member m = new Member();
+//			Member m = new Member();
 //			m.setId(3L);
-			m.setUsername("A");
+//			m.setUsername("A");
+//			
+//			Member m2 = new Member();
+//			m2.setUsername("B");
+//			
+//			Member m3 = new Member();
+//			m3.setUsername("C");
+//			
+//			em.persist(m); // 1, 51
+//			em.persist(m2);
+//			em.persist(m3);
 			
-			Member m2 = new Member();
-			m2.setUsername("B");
+			// ch06. 고급 매핑 - 상속관계매핑
+//			Movie movie = new Movie();
+//			movie.setDirector("박찬욱3");
+//			movie.setActor("액션배우3");
+//			movie.setName("괴물3");
+//			movie.setPrice(200003);
+//			em.persist(movie);
 			
-			Member m3 = new Member();
-			m3.setUsername("C");
+//			Movie findMovie = em.find(Movie.class, movie.getId());
+//			Item findMovie = em.find(Item.class, movie.getId());
+//			System.out.println("findMovie = " + findMovie);
 			
-			em.persist(m); // 1, 51
-			em.persist(m2);
-			em.persist(m3);
+			// ch06. 고급 매핑 - MappedSuperclass
+			Member member = new Member();
+			member.setUsername("park");
+			member.setCreatedBy("park");
+			member.setCreatedDate(LocalDateTime.now());
+			em.persist(member);
+			
+			em.flush();
+			em.clear();
 			
 			tx.commit();
 		} catch (Exception e) {

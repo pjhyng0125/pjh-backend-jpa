@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Category {
+public class Category extends BaseEntity {
 	@Id @GeneratedValue
 	private Long id;
 	
