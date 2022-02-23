@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.hibernate.Hibernate;
+
 public class JpaMain {
 	public static void main(String[] args) {
 		/**
@@ -91,12 +93,30 @@ public class JpaMain {
 			// ch06. 고급 매핑 - MappedSuperclass
 			Member member = new Member();
 			member.setUsername("park");
-			member.setCreatedBy("park");
-			member.setCreatedDate(LocalDateTime.now());
+//			member.setCreatedBy("park");
+//			member.setCreatedDate(LocalDateTime.now());
 			em.persist(member);
 			
 			em.flush();
 			em.clear();
+			
+			// ch08. 프록시
+			// 프록시 클래스
+			Member refMember = em.getReference(Member.class, member.getId());
+			System.out.println("findMember id : " + refMember.getId());
+			// DB에서 가져오지 않으면 알 수 없는 데이터 값이 사용되는 시점에 쿼리 실행
+//			System.out.println("findMember name : " + refMember.getUsername());
+			
+			// 프록시 강제 초기화 (하이버네이트 제공, jpa는 없음)
+			Hibernate.initialize(refMember);
+			
+			// 프록시 인스턴스 초기화 여부 확인
+			System.out.println("isLoaded : " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+			
+			// 프록시 클래스 확인
+			System.out.println("proxy class : " + refMember.getClass().getName());
+			
+			
 			
 			tx.commit();
 		} catch (Exception e) {
