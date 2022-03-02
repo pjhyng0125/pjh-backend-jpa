@@ -21,6 +21,13 @@ public class Member extends BaseEntity {
 	@Column(name = "name", nullable = false)
 	private String username;
 	
+	// LAZY : 지연 로딩
+	@ManyToOne(fetch = FetchType.LAZY)
+	// EAGER : 즉시 로딩 => SQL 문제, JPQL N+1 문제 발생
+//	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn
+	private Team team;
+	
 //	@OneToOne
 //	@JoinColumn(name = "LOCKER_ID")
 //	private Locker locker;
@@ -31,6 +38,14 @@ public class Member extends BaseEntity {
 //	@OneToMany(mappedBy = "member")
 //	private List<MemberProduct> memberProducts = new ArrayList<>();
 	
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 	public Member() {}
 
 	public Long getId() {
