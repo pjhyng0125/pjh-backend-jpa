@@ -1,7 +1,5 @@
 package main.java.hellojpa;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;

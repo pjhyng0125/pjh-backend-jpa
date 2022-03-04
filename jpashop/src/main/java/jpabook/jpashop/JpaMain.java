@@ -15,11 +15,11 @@ public class JpaMain {
 		tx.begin();
 		
 		try {
-			Book book = new Book();
-			book.setName("JPA STUDY");
-			book.setAuthor("PARK");
-			
-			em.persist(book);					
+//			Book book = new Book();
+//			book.setName("JPA STUDY");
+//			book.setAuthor("PARK");
+//			
+//			em.persist(book);					
 			
 			tx.commit();			
 		} catch (Exception e) {
