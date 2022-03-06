@@ -1,6 +1,5 @@
 package main.java.hellojpa;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
