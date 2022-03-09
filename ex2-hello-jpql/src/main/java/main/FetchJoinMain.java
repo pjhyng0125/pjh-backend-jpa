@@ -49,7 +49,7 @@ public class FetchJoinMain {
 			// 패치 조인
 //			jpql = "select m from Member m join fetch m.team";
 			jpql = "select distinct t from Team t join fetch t.members";
-			List<Team> result = em.createQuery(jpql, Team.class)
+			List<Team> result = em .createQuery(jpql, Team.class)
 					.getResultList();
 			jpql = "select m from Team t join fetch m.members";
 			System.out.println("list size : " + result.size());
